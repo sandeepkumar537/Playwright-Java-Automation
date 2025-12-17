@@ -1,4 +1,4 @@
-**Playwright**
+`**Playwright**
 
 Playwright is an **open-source** automation library developed by **Microsoft** for **end-to-end** testing of web applications.
 
@@ -46,9 +46,92 @@ A concise comparison of Playwright and Selenium to help choose the right tool fo
 
 
 **Set-up Playwright**:
-- JDK 8 or higher ( Java 21 or Java 23)
+- JDK 8 or higher (Java 21 or Java 23)
 - Maven/Gradle
 - IntelliJ IDEA CE
-- 
+
+**Maven pom config**
+
+```xml
+ <dependencies>
+        <dependency>
+            <groupId>com.microsoft.playwright</groupId>
+            <artifactId>playwright</artifactId>
+            <version>1.49.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.11.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.26.3</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+```
+
+Base Package:
+import com.microsoft.playwright.*
+
+First Test:
+```java
+import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserType;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+public class SamplePlaywrightTest {
+
+    @Test
+    public void test() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+
+        page.navigate("https://thinking-tester-contact-list.herokuapp.com/");
+
+        Assertions.assertEquals("Contact List App", page.title());
+    }
+}
+```
+
+**Playwright Architecture**
+```
+Playwright (Create browser Instances)
+    |
+Browser (Manage a specific browser instance)
+    |
+BrowserContext (Isolated session in a browser instance - Manage cookies, storage and session data)
+    |
+Page (interact with Single tav within a browser session)
+```
+
+**Playwright Module**
+Playwright
+- **chromium()**—to get Chrome **BrowserType**
+- **firefox()**—to get Chrome **BrowserType**
+- **webkit()**—to get Chrome **BrowserType**
+- **request()**—To work with api request—it will return **APIRequest** class object
+
+**Browser Launch Options**
+- setArgs()
+- setEnv()
+- setDownloadPath()
+- setHeadless()
+- setProxy()
+- setSlowMo()
+
+TODO: Coding examples
+
+**@UsePlaywright**
+
+
+**Allure Reporting Integration**
 
 

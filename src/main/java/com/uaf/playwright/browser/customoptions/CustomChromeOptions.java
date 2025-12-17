@@ -1,4 +1,4 @@
-package com.uaf.playwright.browser;
+package com.uaf.playwright.browser.customoptions;
 
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.junit.Options;
@@ -12,7 +12,7 @@ public class CustomChromeOptions implements OptionsFactory {
         return new Options()
                 .setLaunchOptions(new BrowserType.LaunchOptions()
                         .setHeadless(false)
-                        .setArgs(Arrays.asList("--no-sandox", "--disable-gpu")));
+                        .setArgs(Arrays.asList("--no-sandbox", "--disable-gpu")));
 
     }
 }
